@@ -51,8 +51,9 @@ const App = () => {
                             </Layout>
                         }
                     />
+
+                    <Route path="*" element={<Navigate to="/" />} />
                 </Route>
-                {/* <Route path="*" element={<Navigate to="/" />} /> */}
             </Routes>
         </>
     );
