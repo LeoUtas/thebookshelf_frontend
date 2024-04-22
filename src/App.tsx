@@ -24,13 +24,13 @@ const App = () => {
                         }
                     />
 
-                    <Route path="*" element={<Navigate to="/" />} />
+                    {/* <Route path="*" element={<Navigate to="/welcome" />} /> */}
                 </Routes>
             ) : (
                 <Routes>
                     <Route path="/redirectPage/" element={<Redirect />} />
                     <Route
-                        path="/homeSignedIn"
+                        path="/"
                         element={
                             <Layout>
                                 <HomeSignedIn />

@@ -4,7 +4,8 @@ import { useQuery } from "react-query";
 import { toast } from "sonner";
 
 // import environment variables
-const AUTH_API_URL = import.meta.env.VITE_AUTH_API_URL_DEV as string;
+// const AUTH_API_URL = import.meta.env.VITE_AUTH_API_URL_DEV as string;
+const AUTH_API_URL = import.meta.env.VITE_AUTH_API_URL_PRODUCTION as string;
 
 export const useGetUserApi = () => {
     // get the access token from Auth0

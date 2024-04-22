@@ -28,7 +28,7 @@ export const Redirect = () => {
         }
 
         // the auth0 will redirect the user to this page after being authenticated
-        navigate("/homeSignedIn");
+        navigate("/");
     }, [createUser, navigate, user]);
 
     return <>Redirecting...</>;

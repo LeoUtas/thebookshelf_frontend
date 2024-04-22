@@ -16,7 +16,7 @@ export const NavBar = () => {
     const handleHomeButton = () => {
         // onClick home button, if !isAuthenticated go to "/", else go to "/homeSignedIn"
         if (isAuthenticated) {
-            navigate("/homeSignedIn");
+            navigate("/redirectPage/");
         } else {
             navigate("/");
         }
