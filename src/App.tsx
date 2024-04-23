@@ -7,6 +7,7 @@ import { HomeSignedIn } from "./pages/HomeSignedIn";
 import { NewBook } from "./pages/NewBook";
 import { Redirect } from "./pages/Redirect";
 import { UserProfile } from "./pages/UserProfile";
+import { NewBookForm } from "./components/newbookframe/NewBookForm";
 
 const App = () => {
     const { isAuthenticated } = useAuth0();

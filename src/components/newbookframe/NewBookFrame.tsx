@@ -57,7 +57,7 @@ export const NewBookFrame = () => {
                     ></textarea>
                 </div>
             </form>
-            <div className="fun-button">
+            <div>
                 <button
                     type="button"
                     onClick={handleUpload}

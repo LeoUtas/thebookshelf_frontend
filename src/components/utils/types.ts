@@ -11,3 +11,14 @@ export type User = {
     country?: string;
     phone?: string;
 };
+
+export type Book = {
+    _id: string;
+    auth0Id: string;
+    email: string;
+    title: string;
+    year?: string;
+    author?: string;
+    category?: string;
+    description?: string;
+};

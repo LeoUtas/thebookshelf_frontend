@@ -59,10 +59,10 @@ export const UserProfileForm = ({ onSave, isLoading, currentUser }: Props) => {
                 className="rounded-[1.56rem]"
             >
                 <div>
-                    <h2 className="font-garamond text-[2.5rem] font-normal text-white ml-[5vw] mt-[8vh]">
+                    <h2 className="font-garamond text-[1.5rem] font-normal text-white ml-[5.5vw] mt-[5vh]">
                         Profile
                     </h2>
-                    <FormDescription className="ml-[5vw] font-garamond text-[1.25rem]">
+                    <FormDescription className="ml-[5.5vw] font-garamond text-[1.25rem]">
                         View and change your profile information here
                     </FormDescription>
                 </div>
@@ -73,7 +73,7 @@ export const UserProfileForm = ({ onSave, isLoading, currentUser }: Props) => {
                         name="email"
                         disabled
                         render={({ field }) => (
-                            <FormItem className="ml-[5vw] mt-[4rem] w-[35vw] h-[2rem] items-center">
+                            <FormItem className="ml-[5vw] mt-[2rem] w-[35vw] h-[2rem] items-center">
                                 <FormLabel className="text-white text-xl font-garamond font-normal ml-[.5rem]">
                                     Email
                                 </FormLabel>
