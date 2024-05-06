@@ -55,7 +55,7 @@ export type currentListConversationsData = {
 };
 
 export type BookCardUiProps = {
-    titleText: string;
+    bookTitle: string;
     descriptionText: string;
     width: string;
     height: string;

@@ -48,8 +48,6 @@ export const NewBook = () => {
         completeBookData.append("email", currentUser.email);
         completeBookData.append("userId", currentUser._id);
 
-        const bookTitle = formData.title; // to pass the book title to the chat page
-
         // 1.3. add the book to the shelf
         await addCurrentBook(completeBookData);
 
@@ -63,7 +61,7 @@ export const NewBook = () => {
         // }
 
         // 1.5. redirect the user to the home after all done
-        navigate("/chat", { state: { bookTitle } });
+        navigate("/");
     };
 
     if (isAddCurrentBookLoading) {

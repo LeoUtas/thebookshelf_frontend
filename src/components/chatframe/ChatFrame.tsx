@@ -26,7 +26,10 @@ import { useGetUserApi } from "@/api/authApi/GetUserApi";
 import { useStreamResponse } from "@/aiengine/useStreamResponse";
 import { useAddListConversationsApi } from "@/api/conversation/AddListConversations";
 import { Input } from "../ui/shadcn/input";
-import { ConversationsData } from "../utils/types";
+import {
+    ConversationsData,
+    currentListConversationsData,
+} from "../utils/types";
 import { useGetListConversationsApi } from "@/api/conversation/GetListConversations";
 import { useDeleteConversationApi } from "@/api/conversation/DeleteConversation";
 import { useLocation } from "react-router-dom";
@@ -46,7 +49,7 @@ export const ChatFrame = () => {
     const [conversation, setConversation] = useState<ConversationsData[]>([]);
     const [selectedTitle, setSelectedTitle] = useState(bookTitle);
     const [selectedConversation, setSelectedConversation] =
-        useState<ConversationsData | null>();
+        useState<currentListConversationsData | null>();
     const [displayNewChat, setDisplayNewChat] = useState(true);
     const [position, setPosition] = useState("bottom");
 

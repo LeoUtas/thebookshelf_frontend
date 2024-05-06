@@ -13,10 +13,6 @@ export const BookshelfFrame = () => {
         navigate("/newbook");
     };
 
-    const handleAskLibrarian = () => {
-        navigate("/chat");
-    };
-
     const titleData = currentBooks ? createTitleData(currentBooks) : [];
 
     if (isLoading) {
@@ -32,7 +28,7 @@ export const BookshelfFrame = () => {
                             key={item.titleId}
                             width="w-[10rem]"
                             height="h-[12rem]"
-                            titleText={item.title ? item.title : ""}
+                            bookTitle={item.title ? item.title : ""}
                             descriptionText=""
                             titleTextSize="text-[1.25rem]"
                         />
