@@ -45,8 +45,6 @@ export const NewBookForm = ({ handleAddToShelf, isLoading }: Props) => {
     // create State to hold the file
     const [file, setFile] = useState<File | null>(null);
 
-    console.log(file?.size);
-
     // Extend handleAddToShelf to include the file
     const handleSubmit = (formData: FormType) => {
         if (file) {

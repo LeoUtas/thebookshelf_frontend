@@ -36,11 +36,12 @@ export const useGetUserApi = () => {
         isError,
         isSuccess,
         error,
+        refetch,
     } = useQuery("getCurrentUser", getUserRequest);
 
     if (error) {
         toast.error(error.toString());
     }
 
-    return { currentUser, isLoading, isError, isSuccess, error };
+    return { currentUser, isLoading, isError, isSuccess, error, refetch };
 };
