@@ -9,11 +9,7 @@ export const UserProfile = () => {
     const { currentUser, isLoading: isGetLoading } = useGetUserApi();
 
     if (isGetLoading) {
-        return (
-            <>
-                <Loading />
-            </>
-        );
+        return <Loading />;
     }
 
     if (isUpdateLoading) {

@@ -1,5 +1,5 @@
 import { useGetBooksApi } from "@/api/bookApi/GetListBookApi";
-import { Loading } from "@/pages/BookShelfLoading";
+import { Loading } from "@/pages/BookListLoading";
 import { useNavigate } from "react-router-dom";
 import { BookCardUi } from "../bookCardUi/bookCardUi";
 import { createTitleData } from "./utils";
@@ -16,7 +16,11 @@ export const BookshelfFrame = () => {
     const titleData = currentBooks ? createTitleData(currentBooks) : [];
 
     if (isLoading) {
-        return <Loading />;
+        return (
+            <>
+                <Loading />
+            </>
+        );
     }
 
     return (
