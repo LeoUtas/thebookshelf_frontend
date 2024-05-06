@@ -27,7 +27,7 @@ const formSchema = z.object({
     zip: z.string().optional(),
     country: z.string().optional(),
     phone: z.string().optional(),
-    listCategories: z.array(z.string()),
+    listTitles: z.array(z.string()),
 });
 
 // def the type for the form
@@ -48,7 +48,7 @@ export const UserProfileForm = ({ onSave, isLoading, currentUser }: Props) => {
 
         defaultValues: {
             ...currentUser,
-            listCategories: currentUser.listCategories || [""], // Use existing categories or initialize with [""]
+            listTitles: currentUser.listTitles || [""], // Use existing titles or initialize with [""]
         },
     });
 
