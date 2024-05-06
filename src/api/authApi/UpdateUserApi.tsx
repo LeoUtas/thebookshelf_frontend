@@ -16,7 +16,7 @@ type UpdateUserRequestData = {
     zip?: string;
     country?: string;
     phone?: string;
-    listCategories: string[];
+    listTitles: string[];
 };
 
 export const useUpdateUserApi = () => {
