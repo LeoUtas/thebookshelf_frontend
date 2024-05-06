@@ -31,7 +31,6 @@ export function BookCardUi({
             )} rounded-[1.25rem] border-none bg-gradient-to-br from-[#0b3866] via-[#4b749f]  to-[#08203e] hover:cursor-pointer`}
             onClick={() => {
                 handleBookClick();
-                console.log("BookCardUi: Book clicked");
             }}
         >
             <CardHeader className="h-[9.5rem]">

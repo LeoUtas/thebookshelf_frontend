@@ -27,7 +27,7 @@ const formSchema = z.object({
     zip: z.string().optional(),
     country: z.string().optional(),
     phone: z.string().optional(),
-    listCategories: z.array(z.string()),
+    listTitles: z.array(z.string()),
 });
 
 // def the type for the form
@@ -48,7 +48,7 @@ export const UserProfileForm = ({ onSave, isLoading, currentUser }: Props) => {
 
         defaultValues: {
             ...currentUser,
-            listCategories: currentUser.listCategories || [""], // Use existing categories or initialize with [""]
+            listTitles: currentUser.listTitles || [""], // Use existing book titles or initialize with [""]
         },
     });
 
@@ -260,11 +260,11 @@ export const UserProfileForm = ({ onSave, isLoading, currentUser }: Props) => {
                     />
                 </div>
 
-                {/* explain to future me: this is a hidden form to initialize the field listCategories in the MongoDB database for loading categories used in the Chat with Librarian feature, kind of a nice workaround */}
+                {/* explain to future me: this is a hidden form to initialize the field listTitles in the MongoDB database for loading categories used in the Chat with Librarian feature, kind of a nice workaround */}
                 <div>
                     <FormField
                         control={form.control}
-                        name="listCategories"
+                        name="listTitles"
                         render={({ field }) => (
                             <FormItem>
                                 <FormControl>
