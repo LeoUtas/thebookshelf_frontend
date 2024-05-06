@@ -41,21 +41,13 @@ export const BookshelfFrame = () => {
             </div>
 
             <div>
-                <div className="absolute bottom-[12vh] lg:bottom-[15.5vh] sm:bottom-[12.5vh] right-[10vw] sm:right-[9vw] md:right-[5rem] lg:right-[10vw]">
+                <div className="absolute bottom-[16vh] right-[10vw] sm:right-[9vw] md:right-[5rem] lg:right-[10vw]">
                     <button
                         type="button"
                         className="font-garamond mb-4 mr-[1rem] text-white text-[1.35rem] rounded-[1.56rem] bg-[#2e4789] md:w-[7rem] lg:w-[9.5rem] w-full h-[2.5rem] shadow-[0_3px_5px_rgba(0,0,0,0.3)] transition-transform duration-300 ease-in-out hover:translate-y-[-5px]"
                         onClick={handleNewBook}
                     >
                         New Book
-                    </button>
-
-                    <button
-                        type="button"
-                        className="font-garamond text-white text-[1.35rem] rounded-[1.56rem] bg-[#2e4789] md:w-[12rem] lg:w-[14.25rem] w-full h-[2.5rem] shadow-[0_3px_5px_rgba(0,0,0,0.3)] transition-transform duration-300 ease-in-out hover:translate-y-[-5px]"
-                        onClick={handleAskLibrarian}
-                    >
-                        Chat with Librarian
                     </button>
                 </div>
             </div>
