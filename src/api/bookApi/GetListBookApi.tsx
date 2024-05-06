@@ -1,10 +1,7 @@
 import { BookData } from "@/components/utils/types";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useQuery } from "react-query";
-
-// import environment variables
-const BOOK_API_URL = import.meta.env.VITE_BOOK_API_URL_DEV as string;
-// const BOOK_API_URL = import.meta.env.VITE_BOOK_API_URL_PRODUCTION as string;
+import { BASE_URL } from "../utils/utils";
 
 export const useGetBooksApi = () => {
     // 1. get the access token from Auth0
@@ -14,7 +11,7 @@ export const useGetBooksApi = () => {
         // 3. declare a variable to store the access token getting from Auth0
         const accessToken = await getAccessTokenSilently();
 
-        const url = new URL(BOOK_API_URL);
+        const url = new URL(`${BASE_URL}/api/book`);
         url.searchParams.append("auth0Id", user?.sub as string);
 
         // 4 .make a GET request to the backend

@@ -2,10 +2,7 @@ import { User } from "@/components/utils/types";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useQuery } from "react-query";
 import { toast } from "sonner";
-
-// import environment variables
-const AUTH_API_URL = import.meta.env.VITE_AUTH_API_URL_DEV as string;
-// const AUTH_API_URL = import.meta.env.VITE_AUTH_API_URL_PRODUCTION as string;
+import { BASE_URL } from "../utils/utils";
 
 export const useGetUserApi = () => {
     // get the access token from Auth0
@@ -16,7 +13,7 @@ export const useGetUserApi = () => {
         const accessToken = await getAccessTokenSilently();
 
         // 2 .make a GET request to the backend
-        const response = await fetch(AUTH_API_URL, {
+        const response = await fetch(`${BASE_URL}/api/auth`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${accessToken}`, // add the access token to the headers

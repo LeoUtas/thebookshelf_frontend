@@ -1,10 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useMutation } from "react-query";
 import { toast } from "sonner";
-
-// import environment variables
-const AUTH_API_URL = import.meta.env.VITE_AUTH_API_URL_DEV as string;
-// const AUTH_API_URL = import.meta.env.VITE_AUTH_API_URL_PRODUCTION as string;
+import { BASE_URL } from "../utils/utils";
 
 // def a type for the user update request
 type UpdateUserRequestData = {
@@ -29,7 +26,7 @@ export const useUpdateUserApi = () => {
 
         // 2. declare a variable to store the access token
         // make a POST request to the auth API
-        const response = await fetch(AUTH_API_URL, {
+        const response = await fetch(`${BASE_URL}/api/auth`, {
             method: "PUT",
             headers: {
                 Authorization: `Bearer ${accessToken}`, // add the access token to the headers

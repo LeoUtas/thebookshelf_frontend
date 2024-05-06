@@ -1,10 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useMutation } from "react-query";
 import { toast } from "sonner";
-
-// import environment variables
-const BOOK_API_URL = import.meta.env.VITE_BOOK_API_URL_DEV as string;
-// const BOOK_API_URL = import.meta.env.VITE_BOOK_API_URL_PRODUCTION as string;
+import { BASE_URL } from "../utils/utils";
 
 // def a type for the FormBookData
 // explain for the future me: FormBookData needs to match with FormBookDataSchema in NewBookForm.tsx
@@ -27,7 +24,7 @@ export const useAddCurrentBookApi = () => {
         const accessToken = await getAccessTokenSilently();
 
         // 2. make a POST request to the backend
-        const response = await fetch(BOOK_API_URL, {
+        const response = await fetch(`${BASE_URL}/api/book`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${accessToken}`,

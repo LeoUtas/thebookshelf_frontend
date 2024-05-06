@@ -1,9 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useMutation } from "react-query";
-
-// import environment variables
-const AUTH_API_URL = import.meta.env.VITE_AUTH_API_URL_DEV as string;
-// const AUTH_API_URL = import.meta.env.VITE_AUTH_API_URL_PRODUCTION as string;
+import { BASE_URL } from "../utils/utils";
 
 // def a type for the user request
 type CreateUserRequestData = {
@@ -22,7 +19,7 @@ export const useCreateUserApi = () => {
         const accessToken = await getAccessTokenSilently();
 
         // 2. make a POST request to the backend
-        const response = await fetch(AUTH_API_URL, {
+        const response = await fetch(`${BASE_URL}/api/auth`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${accessToken}`, // add the access token to the headers

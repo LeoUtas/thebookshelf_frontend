@@ -2,9 +2,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useGetUserApi } from "@/api/authApi/GetUserApi";
 import { useState } from "react";
 import { useMutation } from "react-query";
-
-const AICHAT_REQUEST_API_URL = import.meta.env.VITE_AICHAT_REQUEST_API_URL_DEV;
-// const AICHAT_REQUEST_API_URL = import.meta.env.VITE_AICHAT_REQUEST_API_URL_PRO;
+import { BASE_URL } from "../api/utils/utils";
 
 export const useStreamResponse = ({
     streamCallback,
@@ -26,7 +24,7 @@ export const useStreamResponse = ({
             title: string;
         }) => {
             const accessToken = await getAccessTokenSilently();
-            const response = await fetch(AICHAT_REQUEST_API_URL, {
+            const response = await fetch(`${BASE_URL}/api/chat`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

@@ -2,11 +2,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useMutation } from "react-query";
 import { toast } from "sonner";
 import { ConversationsData } from "../../components/utils/types";
-
-// import environment variables
-const LISTCONVERSATIONS_API_URL = import.meta.env
-    .VITE_LISTCONVERSATIONS_API_URL_DEV as string;
-// const LISTCONVERSATIONS_API_URL = import.meta.env.VITE_LISTCONVERSATIONS_API_URL_PRODUCTION as string;
+import { BASE_URL } from "../utils/utils";
 
 export const useAddListConversationsApi = () => {
     // get the access token from Auth0
@@ -22,7 +18,7 @@ export const useAddListConversationsApi = () => {
 
         // 2. declare a variable to store the access token
         // make a POST request to the auth API
-        const response = await fetch(LISTCONVERSATIONS_API_URL, {
+        const response = await fetch(`${BASE_URL}/api/listconversations`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${accessToken}`, // add the access token to the headers
