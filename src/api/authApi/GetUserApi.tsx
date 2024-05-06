@@ -4,8 +4,8 @@ import { useQuery } from "react-query";
 import { toast } from "sonner";
 
 // import environment variables
-// const AUTH_API_URL = import.meta.env.VITE_AUTH_API_URL_DEV as string;
-const AUTH_API_URL = import.meta.env.VITE_AUTH_API_URL_PRODUCTION as string;
+const AUTH_API_URL = import.meta.env.VITE_AUTH_API_URL_DEV as string;
+// const AUTH_API_URL = import.meta.env.VITE_AUTH_API_URL_PRODUCTION as string;
 
 export const useGetUserApi = () => {
     // get the access token from Auth0
@@ -15,7 +15,7 @@ export const useGetUserApi = () => {
         // 1. declare a variable to store the access token getting from Auth0
         const accessToken = await getAccessTokenSilently();
 
-        // 2 .make a GET request to the auth API
+        // 2 .make a GET request to the backend
         const response = await fetch(AUTH_API_URL, {
             method: "GET",
             headers: {

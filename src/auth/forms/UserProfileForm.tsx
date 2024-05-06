@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/shadcn/button";
 import {
     Form,
     FormControl,
@@ -7,8 +7,8 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from "@/components/ui/shadcn/form";
+import { Input } from "@/components/ui/shadcn/input";
 import { LoadingButton } from "@/components/utils/LoadingButton";
 import { User } from "@/components/utils/types";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -27,6 +27,7 @@ const formSchema = z.object({
     zip: z.string().optional(),
     country: z.string().optional(),
     phone: z.string().optional(),
+    listCategories: z.array(z.string()),
 });
 
 // def the type for the form
@@ -43,7 +44,12 @@ export const UserProfileForm = ({ onSave, isLoading, currentUser }: Props) => {
     // 1. create the actually form using react-hook-form
     const form = useForm<FormType>({
         resolver: zodResolver(formSchema), // connect zod to react-hook-form to validate the form
-        defaultValues: currentUser, // set the default values to the current user
+        // defaultValues: currentUser, // set the default values to the current user
+
+        defaultValues: {
+            ...currentUser,
+            listCategories: currentUser.listCategories || [""], // Use existing categories or initialize with [""]
+        },
     });
 
     // reset the form when the current user changes
@@ -249,6 +255,25 @@ export const UserProfileForm = ({ onSave, isLoading, currentUser }: Props) => {
                                     />
                                 </FormControl>
                                 <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                </div>
+
+                {/* explain to future me: this is a hidden form to initialize the field listCategories in the MongoDB database for loading categories used in the Chat with Librarian feature, kind of a nice workaround */}
+                <div>
+                    <FormField
+                        control={form.control}
+                        name="listCategories"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormControl>
+                                    <Input
+                                        {...field}
+                                        placeholder="Category"
+                                        type="hidden"
+                                    />
+                                </FormControl>
                             </FormItem>
                         )}
                     />

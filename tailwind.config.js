@@ -18,8 +18,8 @@ module.exports = {
         },
         extend: {
             fontFamily: {
-                comic: ["Comic Neue", "cursive"],
-                garamond: ["EB Garamond", "serif"],
+                comic: ["Comic Neue", "cursive"], // set custom font
+                garamond: ["EB Garamond", "serif"], // set custom font
             },
 
             fontSize: {

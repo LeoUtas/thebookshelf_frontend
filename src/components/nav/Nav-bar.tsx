@@ -5,9 +5,9 @@ import {
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
-import { Separator } from "../ui/separator";
-import { Button } from "../ui/button";
+} from "../ui/shadcn/dropdown-menu";
+import { Separator } from "../ui/shadcn/separator";
+import { Button } from "../ui/shadcn/button";
 
 export const NavBar = () => {
     const navigate = useNavigate();
@@ -32,7 +32,7 @@ export const NavBar = () => {
         <nav className="flex justify-between pt-[1.8rem] pl-[8vw] pr-[8vw]">
             <Button
                 type="button"
-                className="text-white text-[1.45rem] font-normal font-comic bg-transparent hover:cursor-pointer hover:bg-blue-950"
+                className="text-white text-[1.45rem] font-normal font-comic bg-transparent hover:cursor-pointer hover:bg-blue-950 shadow-none"
                 onClick={handleHomeButton}
                 aria-label="Go to Home"
             >
@@ -41,7 +41,7 @@ export const NavBar = () => {
 
             {isAuthenticated ? (
                 <DropdownMenu>
-                    <DropdownMenuTrigger className="text-white text-[1.45rem] font-normal font-comic pt-[.25rem] pl-[1rem] pr-[1rem] rounded-[.55rem] bg-blue-950  bg-opacity-50 hover:bg-blue-950">
+                    <DropdownMenuTrigger className="text-white text-[1.45rem] font-normal font-comic pt-[.25rem] pl-[1rem] pr-[1rem] rounded-[.55rem] bg-blue-950  bg-opacity-50 hover:bg-blue-950 bg-transparent">
                         Hello {user?.name}
                     </DropdownMenuTrigger>
 

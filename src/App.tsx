@@ -4,9 +4,11 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Layout } from "./layouts/Layout";
 import { Welcome } from "./pages/Welcome";
 import { HomeSignedIn } from "./pages/HomeSignedIn";
+import { ChatWithLibrarian } from "./pages/ChatWithLibrarian";
 import { NewBook } from "./pages/NewBook";
 import { Redirect } from "./pages/Redirect";
 import { UserProfile } from "./pages/UserProfile";
+import { TestUi } from "./pages/testUI";
 
 const App = () => {
     const { isAuthenticated } = useAuth0();
@@ -24,7 +26,7 @@ const App = () => {
                         }
                     />
 
-                    {/* <Route path="*" element={<Navigate to="/welcome" />} /> */}
+                    {/* <Route path="/*" element={<Navigate to="/" />} /> */}
                 </Routes>
             ) : (
                 <Routes>
@@ -34,6 +36,14 @@ const App = () => {
                         element={
                             <Layout>
                                 <HomeSignedIn />
+                            </Layout>
+                        }
+                    />
+                    <Route
+                        path="/chat"
+                        element={
+                            <Layout>
+                                <ChatWithLibrarian />
                             </Layout>
                         }
                     />
@@ -52,6 +62,14 @@ const App = () => {
                         element={
                             <Layout>
                                 <NewBook />
+                            </Layout>
+                        }
+                    />
+                    <Route
+                        path="/testUI"
+                        element={
+                            <Layout>
+                                <TestUi />
                             </Layout>
                         }
                     />

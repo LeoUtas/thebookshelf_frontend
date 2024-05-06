@@ -3,8 +3,8 @@ import { useMutation } from "react-query";
 import { toast } from "sonner";
 
 // import environment variables
-// const AUTH_API_URL = import.meta.env.VITE_AUTH_API_URL_DEV as string;
-const AUTH_API_URL = import.meta.env.VITE_AUTH_API_URL_PRODUCTION as string;
+const AUTH_API_URL = import.meta.env.VITE_AUTH_API_URL_DEV as string;
+// const AUTH_API_URL = import.meta.env.VITE_AUTH_API_URL_PRODUCTION as string;
 
 // def a type for the user update request
 type UpdateUserRequestData = {
@@ -16,6 +16,7 @@ type UpdateUserRequestData = {
     zip?: string;
     country?: string;
     phone?: string;
+    listCategories: string[];
 };
 
 export const useUpdateUserApi = () => {
@@ -42,6 +43,9 @@ export const useUpdateUserApi = () => {
             throw new Error("Failed to update user");
         }
 
+        // 4. toast a success message
+        toast.success("User updated successfully");
+
         return response.json();
     };
 
@@ -53,10 +57,6 @@ export const useUpdateUserApi = () => {
         isError,
         error,
     } = useMutation(updateUserRequest);
-
-    if (isSuccess) {
-        toast.success("User updated successfully");
-    }
 
     if (error) {
         toast.error(error.toString());

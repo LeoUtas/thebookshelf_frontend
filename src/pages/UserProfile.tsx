@@ -1,6 +1,7 @@
 import { useGetUserApi } from "@/api/authApi/GetUserApi";
 import { useUpdateUserApi } from "@/api/authApi/UpdateUserApi";
 import { UserProfileForm } from "@/auth/forms/UserProfileForm";
+import { Loading } from "./BookShelfLoading";
 
 export const UserProfile = () => {
     const { updateUser, isLoading: isUpdateLoading } = useUpdateUserApi();
@@ -8,7 +9,19 @@ export const UserProfile = () => {
     const { currentUser, isLoading: isGetLoading } = useGetUserApi();
 
     if (isGetLoading) {
-        return <>Loading...</>;
+        return (
+            <>
+                <Loading />
+            </>
+        );
+    }
+
+    if (isUpdateLoading) {
+        return (
+            <>
+                <Loading />
+            </>
+        );
     }
 
     if (!currentUser) {
