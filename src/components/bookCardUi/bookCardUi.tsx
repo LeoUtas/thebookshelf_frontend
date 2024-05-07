@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/shadcn/button";
 import {
     Card,
     CardDescription,
@@ -11,7 +10,19 @@ import { RiMagicFill } from "react-icons/ri";
 import { BookCardUiProps } from "../utils/types";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from "@/components/ui/shadcn/dropdown-menu";
+import { useDeleteBookApi } from "@/api/bookApi/DeleteBookApi";
+
+import { Loading } from "@/pages/BookListLoading";
+import { useGetBooksApi } from "@/api/bookApi/GetListBookApi";
+
 export function BookCardUi({
+    bookId,
     bookTitle,
     descriptionText,
     width,
@@ -20,20 +31,34 @@ export function BookCardUi({
 }: BookCardUiProps) {
     const navigate = useNavigate();
 
+    const { deleteBook, isLoading: isDeleteBookLoading } = useDeleteBookApi();
+    const { refetch } = useGetBooksApi();
+
     const handleBookClick = () => {
         navigate("/chat", { state: { bookTitle } });
     };
+
+    const handleDeleteBook = async () => {
+        await deleteBook(bookId);
+        refetch();
+    };
+
+    if (isDeleteBookLoading) {
+        return <Loading />;
+    }
 
     return (
         <Card
             className={`${[width, height].join(
                 " "
             )} rounded-[1.25rem] border-none bg-gradient-to-br from-[#0b3866] via-[#4b749f]  to-[#08203e] hover:cursor-pointer`}
-            onClick={() => {
-                handleBookClick();
-            }}
         >
-            <CardHeader className="h-[9.5rem]">
+            <CardHeader
+                className="h-[9.5rem]"
+                onClick={() => {
+                    handleBookClick();
+                }}
+            >
                 <CardTitle
                     className={`font-garamond text-white font-normal ${titleTextSize}`}
                 >
@@ -43,15 +68,32 @@ export function BookCardUi({
             </CardHeader>
 
             <CardFooter>
-                <Button
-                    variant="outline"
-                    className=" bg-transparent border-none hover:bg-transparent"
-                >
-                    <div className="gap-1 flex flex-row">
-                        <RiMagicFill color="white" size={24} />
-                        <HiOutlineDotsHorizontal color="white" size={24} />
-                    </div>
-                </Button>
+                <DropdownMenu>
+                    <DropdownMenuTrigger className="outline-none">
+                        <div className="gap-1 flex flex-row">
+                            <RiMagicFill color="white" size={24} />
+                            <HiOutlineDotsHorizontal color="white" size={24} />
+                        </div>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="absolute left-full pl-[2rem] hover:px-[2.1rem]">
+                        <DropdownMenuItem
+                            className="flex text-center"
+                            onClick={() => {
+                                console.log("Details clicked");
+                            }}
+                        >
+                            Details
+                        </DropdownMenuItem>
+                        <DropdownMenuItem
+                            className="flex text-center"
+                            onClick={() => {
+                                handleDeleteBook();
+                            }}
+                        >
+                            Delete
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
             </CardFooter>
         </Card>
     );

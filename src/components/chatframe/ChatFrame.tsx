@@ -24,14 +24,14 @@ import "./chatframe.css";
 import { Loading } from "@/pages/BookShelfLoading";
 import { useGetUserApi } from "@/api/authApi/GetUserApi";
 import { useStreamResponse } from "@/aiengine/useStreamResponse";
-import { useAddListConversationsApi } from "@/api/conversation/AddListConversations";
+import { useAddListConversationsApi } from "@/api/conversation/AddListConversationsApi";
 import { Input } from "../ui/shadcn/input";
 import {
     ConversationsData,
     currentListConversationsData,
 } from "../utils/types";
-import { useGetListConversationsApi } from "@/api/conversation/GetListConversations";
-import { useDeleteConversationApi } from "@/api/conversation/DeleteConversation";
+import { useGetListConversationsApi } from "@/api/conversation/GetListConversationsApi";
+import { useDeleteConversationApi } from "@/api/conversation/DeleteConversationApi";
 import { useLocation } from "react-router-dom";
 
 const querySchema = z.object({

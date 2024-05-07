@@ -8,7 +8,7 @@ interface Category {
 }
 
 interface Title {
-    titleId: string;
+    bookId: string;
     title: string;
 }
 
@@ -31,33 +31,14 @@ export const createCategoryData = (books: BookData[]): Category[] => {
     return categoryData;
 };
 
-export const createTitleData2 = (books: BookData[]): Title[] => {
-    const titleMap = new Map<string, string>();
-
-    books.forEach((book) => {
-        // Only add the title to the map if it's not already present and if it's not undefined
-        if (book.title && !titleMap.has(book.title)) {
-            titleMap.set(book.title, uuidv4());
-        }
-    });
-
-    // Convert the map into an array of objects
-    const titleData = Array.from(titleMap, ([title, titleId]) => ({
-        titleId,
-        title,
-    }));
-
-    return titleData;
-};
-
 export const createTitleData = (books: BookData[]): Title[] => {
     const titles: Title[] = [];
 
     books.forEach((book) => {
         if (book.title) {
             // Generate a unique ID for every title, even if it's a duplicate
-            const titleId = uuidv4();
-            titles.push({ titleId, title: book.title });
+            const bookId = book.bookId;
+            titles.push({ bookId, title: book.title });
         }
     });
 
