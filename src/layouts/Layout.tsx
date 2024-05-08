@@ -8,6 +8,7 @@ interface Props {
     children: React.ReactNode;
 }
 
+// Layout component
 export const Layout = ({ children }: Props) => {
     const { isAuthenticated } = useAuth0();
 

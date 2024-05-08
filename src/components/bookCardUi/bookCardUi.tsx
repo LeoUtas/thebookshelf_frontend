@@ -5,10 +5,12 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
+
 import { useNavigate } from "react-router-dom";
 import { RiMagicFill } from "react-icons/ri";
 import { BookCardUiProps } from "../utils/types";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
+import { HiOutlineSelector } from "react-icons/hi";
 
 import {
     DropdownMenu,
@@ -18,7 +20,7 @@ import {
 } from "@/components/ui/shadcn/dropdown-menu";
 import { useDeleteBookApi } from "@/api/bookApi/DeleteBookApi";
 
-import { Loading } from "@/pages/BookListLoading";
+import { Loading } from "@/pages/BookShelfLoading";
 import { useGetBooksApi } from "@/api/bookApi/GetListBookApi";
 
 export function BookCardUi({
@@ -30,7 +32,6 @@ export function BookCardUi({
     titleTextSize = "text-[1.5rem]",
 }: BookCardUiProps) {
     const navigate = useNavigate();
-
     const { deleteBook, isLoading: isDeleteBookLoading } = useDeleteBookApi();
     const { refetch } = useGetBooksApi();
 
@@ -41,6 +42,10 @@ export function BookCardUi({
     const handleDeleteBook = async () => {
         await deleteBook(bookId);
         refetch();
+    };
+
+    const handleBookDetails = async () => {
+        navigate("/bookdetails", { state: { bookId } });
     };
 
     if (isDeleteBookLoading) {
@@ -54,7 +59,7 @@ export function BookCardUi({
             )} rounded-[1.25rem] border-none bg-gradient-to-br from-[#0b3866] via-[#4b749f]  to-[#08203e] hover:cursor-pointer`}
         >
             <CardHeader
-                className="h-[9.5rem]"
+                className="h-[10rem]"
                 onClick={() => {
                     handleBookClick();
                 }}
@@ -70,15 +75,17 @@ export function BookCardUi({
             <CardFooter>
                 <DropdownMenu>
                     <DropdownMenuTrigger className="outline-none">
-                        <div className="gap-1 flex flex-row">
-                            <RiMagicFill color="white" size={24} />
-                            <HiOutlineDotsHorizontal color="white" size={24} />
+                        <div className="gap-1 flex flex-row ml-[3rem]">
+                            <RiMagicFill color="white" size={20} />
+                            <HiOutlineDotsHorizontal color="white" size={20} />
+                            <HiOutlineSelector color="white" size={20} />
                         </div>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="absolute left-full pl-[2rem] hover:px-[2.1rem]">
                         <DropdownMenuItem
                             className="flex text-center"
                             onClick={() => {
+                                handleBookDetails();
                                 console.log("Details clicked");
                             }}
                         >

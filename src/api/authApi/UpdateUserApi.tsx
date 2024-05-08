@@ -2,25 +2,13 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useMutation } from "react-query";
 import { toast } from "sonner";
 import { BASE_URL } from "../utils/utils";
-
-// def a type for the user update request
-type UpdateUserRequestData = {
-    firstName: string;
-    lastName: string;
-    addressLine1?: string;
-    city?: string;
-    state?: string;
-    zip?: string;
-    country?: string;
-    phone?: string;
-    listTitles: string[];
-};
+import { UpdateUserData } from "@/components/utils/types";
 
 export const useUpdateUserApi = () => {
     // get the access token from Auth0
     const { getAccessTokenSilently } = useAuth0();
 
-    const updateUserRequest = async (formData: UpdateUserRequestData) => {
+    const updateUserRequest = async (formData: UpdateUserData) => {
         // 1. declare a variable to store the access token
         const accessToken = await getAccessTokenSilently();
 

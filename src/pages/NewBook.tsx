@@ -1,11 +1,12 @@
 import { NewBookForm } from "@/components/newbookframe/NewBookForm";
 import { Header } from "../components/header/Header";
-import { FormBookData, useAddCurrentBookApi } from "@/api/bookApi/AddBookApi";
+import { useAddCurrentBookApi } from "@/api/bookApi/AddBookApi";
 
 import { useGetUserApi } from "@/api/authApi/GetUserApi";
 import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router-dom";
 import { Loading } from "./BookShelfLoading";
+import { FormBookData } from "@/components/utils/types";
 // import { useCreateVectorSearchApi } from "@/api/chatApi/CreateVectorSearchApi";
 
 export const NewBook = () => {

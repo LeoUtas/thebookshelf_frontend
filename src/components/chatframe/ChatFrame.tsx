@@ -43,7 +43,8 @@ type FormData = z.infer<typeof querySchema>;
 export const ChatFrame = () => {
     // 1. declare state variables for the chat frame
     const location = useLocation();
-    const bookTitle = location.state?.bookTitle as string | null;
+    const bookTitle = location.state?.bookTitle as string;
+
     const [responses, setResponses] = useState("");
     const [userQuery, setUserQuery] = useState("");
     const [conversation, setConversation] = useState<ConversationsData[]>([]);

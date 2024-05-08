@@ -9,6 +9,7 @@ import { NewBook } from "./pages/NewBook";
 import { Redirect } from "./pages/Redirect";
 import { UserProfile } from "./pages/UserProfile";
 import { TestUi } from "./pages/testUI";
+import { BookDetails } from "./pages/BookDetails";
 
 const App = () => {
     const { isAuthenticated } = useAuth0();
@@ -65,6 +66,16 @@ const App = () => {
                             </Layout>
                         }
                     />
+
+                    <Route
+                        path="/bookdetails"
+                        element={
+                            <Layout>
+                                <BookDetails />
+                            </Layout>
+                        }
+                    />
+
                     <Route
                         path="/testUI"
                         element={

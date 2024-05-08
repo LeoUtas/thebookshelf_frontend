@@ -1,12 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useMutation } from "react-query";
 import { BASE_URL } from "../utils/utils";
-
-// def a type for the user request
-type CreateUserRequestData = {
-    auth0Id: string;
-    email: string;
-};
+import { CreateUserRequestData } from "@/components/utils/types";
 
 // def a hook to make use of the AuthAPI
 export const useCreateUserApi = () => {

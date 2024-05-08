@@ -4,14 +4,6 @@ import { toast } from "sonner";
 import { BASE_URL } from "../utils/utils";
 
 // def a type for the FormBookData
-// explain for the future me: FormBookData needs to match with FormBookDataSchema in NewBookForm.tsx
-export type FormBookData = {
-    title: string;
-    year?: string;
-    author?: string;
-    category: string;
-    description?: string;
-};
 
 // def a hook to make use of the AuthAPI
 export const useAddCurrentBookApi = () => {
