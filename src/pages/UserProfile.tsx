@@ -5,8 +5,9 @@ import { Loading } from "./BookShelfLoading";
 
 export const UserProfile = () => {
     const { updateUser, isLoading: isUpdateLoading } = useUpdateUserApi();
+    const { currentUser, refetch, isLoading: isGetLoading } = useGetUserApi();
 
-    const { currentUser, isLoading: isGetLoading } = useGetUserApi();
+    refetch();
 
     if (isGetLoading) {
         return <Loading />;

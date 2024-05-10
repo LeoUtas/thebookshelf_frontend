@@ -34,6 +34,8 @@ export const useStreamResponse = ({
                     query: query,
                     title: title,
                     auth0Id: currentUser?.auth0Id,
+                    email: currentUser?.email,
+                    userNo: currentUser?.userNo,
                 }),
             });
 

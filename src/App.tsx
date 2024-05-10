@@ -8,7 +8,7 @@ import { ChatWithLibrarian } from "./pages/ChatWithLibrarian";
 import { NewBook } from "./pages/NewBook";
 import { Redirect } from "./pages/Redirect";
 import { UserProfile } from "./pages/UserProfile";
-import { TestUi } from "./pages/testUI";
+import { TestUi } from "./pages/testUi";
 import { BookDetails } from "./pages/BookDetails";
 
 const App = () => {
@@ -77,7 +77,7 @@ const App = () => {
                     />
 
                     <Route
-                        path="/testUI"
+                        path="/testui"
                         element={
                             <Layout>
                                 <TestUi />

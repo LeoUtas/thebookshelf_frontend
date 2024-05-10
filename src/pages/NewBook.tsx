@@ -7,7 +7,6 @@ import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router-dom";
 import { Loading } from "./BookShelfLoading";
 import { FormBookData } from "@/components/utils/types";
-// import { useCreateVectorSearchApi } from "@/api/chatApi/CreateVectorSearchApi";
 
 export const NewBook = () => {
     const navigate = useNavigate();
@@ -16,11 +15,6 @@ export const NewBook = () => {
 
     const { addCurrentBook, isLoading: isAddCurrentBookLoading } =
         useAddCurrentBookApi();
-
-    // const {
-    //     fetchCreateVectorSearch,
-    //     isLoading: isFetchCreateVectorSearchLoading,
-    // } = useCreateVectorSearchApi();
 
     // 1. create a function to handle the form submission - extend the data fields with the user data
     const handleAddToShelf = async (formData: FormBookData, file: File) => {
@@ -48,30 +42,18 @@ export const NewBook = () => {
         completeBookData.append("auth0Id", currentUser.auth0Id);
         completeBookData.append("email", currentUser.email);
         completeBookData.append("userId", currentUser._id);
+        completeBookData.append("userNo", currentUser.userNo.toString());
 
         // 1.3. add the book to the shelf
         await addCurrentBook(completeBookData);
 
-        // for some reason this createVectorSearch is not working yet
-        // 1.4. check if the formData.category is a new one (i.e., not exist in the listCategories) => send a request to creat a new vector search (i.e., using sendCreateVectorSearchRequest())
-        // if isGetCurrentUserLoading is done, then asign the listCategories to the listCategories variable
-        // const listCategories = currentUser?.listCategories || [];
-
-        // if (!listCategories.includes(formData.category)) {
-        //     await fetchCreateVectorSearch(formData.category);
-        // }
-
-        // 1.5. redirect the user to the home after all done
+        // 1.4. redirect the user to the home after all done
         navigate("/");
     };
 
     if (isAddCurrentBookLoading) {
         return <Loading />;
     }
-
-    // if (isFetchCreateVectorSearchLoading) {
-    //     return <Loading />;
-    // }
 
     // if the getting user data is loading => render a loading page to the user
     if (isGetCurrentUserLoading) {

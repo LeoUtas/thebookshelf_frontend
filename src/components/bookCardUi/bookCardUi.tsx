@@ -11,6 +11,7 @@ import { RiMagicFill } from "react-icons/ri";
 import { BookCardUiProps } from "../utils/types";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { HiOutlineSelector } from "react-icons/hi";
+import { MdAutoDelete } from "react-icons/md";
 
 import {
     DropdownMenu,
@@ -20,7 +21,6 @@ import {
 } from "@/components/ui/shadcn/dropdown-menu";
 import { useDeleteBookApi } from "@/api/bookApi/DeleteBookApi";
 
-import { Loading } from "@/pages/BookShelfLoading";
 import { useGetBooksApi } from "@/api/bookApi/GetListBookApi";
 
 export function BookCardUi({
@@ -49,7 +49,13 @@ export function BookCardUi({
     };
 
     if (isDeleteBookLoading) {
-        return <Loading />;
+        return (
+            <>
+                <div className="flex flex-col items-center">
+                    <MdAutoDelete color="white" size={28} />
+                </div>
+            </>
+        );
     }
 
     return (
@@ -86,7 +92,6 @@ export function BookCardUi({
                             className="flex text-center"
                             onClick={() => {
                                 handleBookDetails();
-                                console.log("Details clicked");
                             }}
                         >
                             Details

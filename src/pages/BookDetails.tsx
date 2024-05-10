@@ -9,7 +9,12 @@ import { BookData, FormBookData } from "@/components/utils/types";
 export const BookDetails = () => {
     const location = useLocation();
     const bookId = location.state?.bookId as string;
-    const { currentBooks, isLoading: isCurrentBookLoading } = useGetBooksApi();
+
+    const {
+        currentBooks,
+        isLoading: isCurrentBookLoading,
+        refetch,
+    } = useGetBooksApi();
 
     const { updateBookDetails, isLoading: isUpdateBookDetailsLoading } =
         useUpdateBookDetailsApi();
@@ -42,6 +47,8 @@ export const BookDetails = () => {
         await updateBookDetails(completeBookDetails);
     };
 
+    refetch();
+
     if (isCurrentBookLoading) {
         return <Loading />;
     }
@@ -49,10 +56,6 @@ export const BookDetails = () => {
     if (isUpdateBookDetailsLoading) {
         return <Loading />;
     }
-
-    console.log(currentBooks);
-    console.log("selectedBook.author");
-    console.log(bookId);
 
     return (
         <>

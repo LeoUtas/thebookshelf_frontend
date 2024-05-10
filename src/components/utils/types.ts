@@ -11,6 +11,7 @@ export type User = {
     _id: string;
     auth0Id: string;
     email: string;
+    userNo: number;
     firstName: string;
     lastName: string;
     addressLine1?: string;

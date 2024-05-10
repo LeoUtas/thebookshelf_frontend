@@ -1,19 +1,16 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useMutation } from "react-query";
-import { toast } from "sonner";
 import { BASE_URL } from "../utils/utils";
-import { useGetUserApi } from "../authApi/GetUserApi";
 
-export const useDeleteBookApi = () => {
+export const useDeleteUserApi = () => {
     // 1. get the access token from Auth0
     const { getAccessTokenSilently } = useAuth0();
-    const { currentUser } = useGetUserApi();
 
-    const deleteBookRequest = async (bookId: string) => {
+    const deleteUserRequest = async () => {
         // 3. declare a variable to store the access token getting from Auth0
         const accessToken = await getAccessTokenSilently();
 
-        const url = new URL(`${BASE_URL}/api/book`);
+        const url = new URL(`${BASE_URL}/api/auth`);
 
         // 4 .make a request to the backend
         const response = await fetch(url.toString(), {
@@ -22,35 +19,27 @@ export const useDeleteBookApi = () => {
                 Authorization: `Bearer ${accessToken}`, // add the access token to the headers
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-                bookId: bookId,
-                auth0Id: currentUser?.auth0Id,
-                email: currentUser?.email,
-                userNo: currentUser?.userNo,
-            }),
         });
 
         // 5. check if the request was successful
         if (!response.ok) {
-            throw new Error("Failed to delete book");
+            throw new Error("Failed to delete user");
         }
-
-        toast.success("Book deleted successfully");
 
         return response.json();
     };
 
     // 4. use the useMutation hook to get the selected conversationId
     const {
-        mutateAsync: deleteBook,
+        mutateAsync: deleteUser,
         isLoading,
         isError,
         isSuccess,
         error,
-    } = useMutation(deleteBookRequest);
+    } = useMutation(deleteUserRequest);
 
     return {
-        deleteBook,
+        deleteUser,
         isLoading,
         isError,
         isSuccess,

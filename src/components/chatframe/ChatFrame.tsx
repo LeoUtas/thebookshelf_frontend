@@ -10,6 +10,8 @@ import {
     SelectValue,
 } from "@/components/ui/shadcn/select";
 import { RiMagicFill } from "react-icons/ri";
+import { MdAutoDelete } from "react-icons/md";
+import { GiSave } from "react-icons/gi";
 
 import { Button } from "@/components/ui/shadcn/button";
 import {
@@ -21,8 +23,7 @@ import {
 } from "@/components/ui/shadcn/dropdown-menu";
 
 import "./chatframe.css";
-import { Loading } from "@/pages/BookShelfLoading";
-import { useGetUserApi } from "@/api/authApi/GetUserApi";
+
 import { useStreamResponse } from "@/aiengine/useStreamResponse";
 import { useAddListConversationsApi } from "@/api/conversation/AddListConversationsApi";
 import { Input } from "../ui/shadcn/input";
@@ -30,9 +31,12 @@ import {
     ConversationsData,
     currentListConversationsData,
 } from "../utils/types";
+
 import { useGetListConversationsApi } from "@/api/conversation/GetListConversationsApi";
 import { useDeleteConversationApi } from "@/api/conversation/DeleteConversationApi";
 import { useLocation } from "react-router-dom";
+import { useGetBooksApi } from "@/api/bookApi/GetListBookApi";
+import { createTitleData } from "../bookshelfframe/utils";
 
 const querySchema = z.object({
     query: z.string(),
@@ -45,6 +49,9 @@ export const ChatFrame = () => {
     const location = useLocation();
     const bookTitle = location.state?.bookTitle as string;
 
+    const { currentBooks } = useGetBooksApi();
+    const titleData = currentBooks ? createTitleData(currentBooks) : [];
+
     const [responses, setResponses] = useState("");
     const [userQuery, setUserQuery] = useState("");
     const [conversation, setConversation] = useState<ConversationsData[]>([]);
@@ -54,12 +61,11 @@ export const ChatFrame = () => {
     const [displayNewChat, setDisplayNewChat] = useState(true);
     const [position, setPosition] = useState("bottom");
 
-    // call the useGetUserApi hook from the authApi folder to load the listTitles for the currentUser
-    const { currentUser, isLoading: isGetCurrentUserLoading } = useGetUserApi();
     // call the useGetListConversationsApi hook from the conversation folder to get the list of conversations
     const { currentListConversations, refetch } = useGetListConversationsApi();
     // call the useDeleteConversationApi hook from the conversation folder to delete the selected conversation
-    const { deleteConversation } = useDeleteConversationApi();
+    const { deleteConversation, isLoading: isDeleteConversationLoading } =
+        useDeleteConversationApi();
 
     // create a function to handle the end of the streaming response
     const handleStreamEnd = useCallback(() => {
@@ -81,13 +87,16 @@ export const ChatFrame = () => {
         resolver: zodResolver(querySchema),
     });
 
-    // create a function to handle a mechanism to kick off the streaming response when the user submits a query
-    // (i.e., when the user presses the Enter key => query and selectedTitle are sent to the backend)
+    // explain for the future me: this code is to create a function to handle
+    // a mechanism to kick off the streaming response when the user submits a query
+    // (i.e., when the user presses the Enter key => query and selected book title are sent to the backend)
+    // the current version only allows the user to chat about one book at a time
+    // future version might allow the user to switch between books simultaneously (not sure let me think)
     const onSubmit = useCallback(
         (data: FormData) => {
             startStream({
-                query: data.query,
-                title: selectedTitle ?? "",
+                query: data.query, // send the user query to the backend
+                title: selectedTitle, // send the selected book title to the backend
             });
 
             setValue("query", "");
@@ -163,16 +172,21 @@ export const ChatFrame = () => {
         refetch();
     };
 
-    // this is for loading nothing special about it
-    if (isGetCurrentUserLoading) {
-        return <Loading />;
+    if (isDeleteConversationLoading) {
+        return (
+            <>
+                <div>
+                    <MdAutoDelete color="white" size={28} />
+                </div>
+            </>
+        );
     }
 
     return (
         <>
             <div className="relative h-[73vh] rounded-[1.56rem] border-[#0085ff] bg-white bg-opacity-70 mx-auto mt-[1.25rem]">
                 <div className="no-scrollbar overflow-y-auto absolute top-0 left-0 w-1/4 h-full rounded-xl bg-[#f6f6f6]">
-                    {/* display saved conversation titles */}
+                    {/* display saved conversation titles on the left */}
                     <div className="absolute no-scrollbar left-0 w-full h-[68vh] rounded-xl bg-[#f6f6f6]">
                         <div className="flex flex-col space-y-[1rem] px-[2vw]">
                             {currentListConversations &&
@@ -228,7 +242,7 @@ export const ChatFrame = () => {
                     </div>
                 </div>
 
-                {/* display the select listTitles menu */}
+                {/* start a new chat*/}
                 <div className="absolute right-0 w-[71vw] min-h-[80vh] max-h-[200vh] rounded-[1.25rem] bg-transparent mx-auto">
                     <div className="flex items-center mt-[1.5vh]">
                         <div className="absolute w-[10.5vw] border border-[#9bafd9] py-[.1rem] rounded-2xl shadow-lg active:shadow-inner focus:outline-none transition-all duration-150 ease-in-out">
@@ -243,7 +257,7 @@ export const ChatFrame = () => {
 
                         <div className="ml-[12vw]">
                             <Select onValueChange={setSelectedTitle}>
-                                <SelectTrigger className="font-garamond text-[1.25rem] text-gray-800  w-[10.5vw] py-[1.25rem] px-[1rem] border border-[#9bafd9] shadow-lg rounded-[0.8rem] hover:font-bold">
+                                <SelectTrigger className="font-garamond text-[1.25rem] text-gray-800  w-[35.5vw] py-[1.25rem] px-[1rem] border border-[#9bafd9] shadow-lg rounded-[0.8rem] hover:font-bold">
                                     {selectedTitle ? (
                                         <SelectValue
                                             placeholder={selectedTitle}
@@ -253,21 +267,16 @@ export const ChatFrame = () => {
                                     )}
                                 </SelectTrigger>
                                 <SelectContent className="rounded-[0.8rem]">
-                                    {currentUser?.listTitles.map(
-                                        (item, index) => (
-                                            <SelectItem
-                                                key={index}
-                                                value={item}
-                                            >
-                                                {item}
-                                            </SelectItem>
-                                        )
-                                    )}
+                                    {titleData?.map((item) => (
+                                        <SelectItem
+                                            key={item.bookId}
+                                            value={item.title}
+                                        >
+                                            {item.title}
+                                        </SelectItem>
+                                    ))}
                                 </SelectContent>
                             </Select>
-                        </div>
-                        <div className="ml-[4vw] font-garamond text-[1.25rem] text-violet-950">
-                            Ask anything about your book
                         </div>
                     </div>
 
@@ -297,8 +306,11 @@ export const ChatFrame = () => {
                         </div>
                     )}
 
+                    {/* display the streaming conversation */}
                     {isAddListConversationLoading ? (
-                        <div>...loading</div>
+                        <div className="mt-[2rem]">
+                            <GiSave color="white" size={28} />
+                        </div>
                     ) : (
                         <div className="no-scrollbar mb-[2rem] absolute top-[6rem] pb-[10rem] w-[70vw] h-[60vh] overflow-y-auto font-garamond text-[1.25rem] px-[5vw] leading-[2.25rem]">
                             <div className="overflow-y-auto">
@@ -324,7 +336,7 @@ export const ChatFrame = () => {
                             </div>
 
                             {userQuery !== "" && (
-                                <div className="overflow-y-auto">
+                                <div className="">
                                     <div className="text-blue-800 font-semibold ">
                                         You
                                     </div>
