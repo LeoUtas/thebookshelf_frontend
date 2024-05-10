@@ -25,7 +25,7 @@ export const BookshelfFrame = () => {
 
     return (
         <>
-            <div className="relative no-scrollbar overflow-y-auto w-[85vw] h-[60vh] rounded-[1.56rem] border-solid border-[0.2rem] border-blue-500 mx-auto mt-[1.25rem] mb-[15vh]">
+            <div className="relative no-scrollbar overflow-y-auto w-[85vw] h-[60vh] rounded-[1.56rem] border-solid border-[0.2rem] border-blue-500 mx-auto mt-[1.25rem] mb-[12vh]">
                 <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[2vw] md:gap-[5vw] mt-[5vh] ml-[2vw] mr-[2vw] sm:ml-[10vw] sm:mr-[10vw]">
                     {titleData?.map((item) => (
                         <BookCardUi
