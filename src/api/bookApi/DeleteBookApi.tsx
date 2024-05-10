@@ -10,12 +10,12 @@ export const useDeleteBookApi = () => {
     const { currentUser } = useGetUserApi();
 
     const deleteBookRequest = async (bookId: string) => {
-        // 3. declare a variable to store the access token getting from Auth0
+        // 2. declare a variable to store the access token getting from Auth0
         const accessToken = await getAccessTokenSilently();
 
         const url = new URL(`${BASE_URL}/api/book`);
 
-        // 4 .make a request to the backend
+        // 3 .make a request to the backend
         const response = await fetch(url.toString(), {
             method: "DELETE",
             headers: {
@@ -30,7 +30,7 @@ export const useDeleteBookApi = () => {
             }),
         });
 
-        // 5. check if the request was successful
+        // 4. check if the request was successful
         if (!response.ok) {
             throw new Error("Failed to delete book");
         }
@@ -40,7 +40,7 @@ export const useDeleteBookApi = () => {
         return response.json();
     };
 
-    // 4. use the useMutation hook to get the selected conversationId
+    // 5. use the useMutation hook to delete a book
     const {
         mutateAsync: deleteBook,
         isLoading,

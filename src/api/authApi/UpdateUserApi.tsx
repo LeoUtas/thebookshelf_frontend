@@ -13,7 +13,6 @@ export const useUpdateUserApi = () => {
         const accessToken = await getAccessTokenSilently();
 
         // 2. declare a variable to store the access token
-        // make a POST request to the auth API
         const response = await fetch(`${BASE_URL}/api/auth`, {
             method: "PUT",
             headers: {

@@ -43,10 +43,10 @@ export const Vortex = (props: VortexProps) => {
     let center: [number, number] = [0, 0];
 
     const HALF_PI: number = 0.5 * Math.PI;
-    // console.log(HALF_PI);
+    console.log(HALF_PI);
     const TAU: number = 2 * Math.PI * Math.random();
     const TO_RAD: number = Math.PI / 180;
-    // console.log(TO_RAD);
+    console.log(TO_RAD);
     const rand = (n: number): number => n * Math.random();
     const randRange = (n: number): number => n - rand(2 * n);
     const fadeInOut = (t: number, m: number): number => {

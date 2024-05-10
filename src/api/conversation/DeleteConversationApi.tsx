@@ -36,7 +36,7 @@ export const useDeleteConversationApi = () => {
         return response.json();
     };
 
-    // 4. use the useMutation hook to get the selected conversationId
+    // 4. use the useMutation hook to delete a conversation
     const {
         mutateAsync: deleteConversation,
         isLoading,

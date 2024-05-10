@@ -8,13 +8,13 @@ export const useGetBooksApi = () => {
     const { getAccessTokenSilently, user } = useAuth0();
 
     const getBooksRequest = async (): Promise<BookData[]> => {
-        // 3. declare a variable to store the access token getting from Auth0
+        // 2. declare a variable to store the access token getting from Auth0
         const accessToken = await getAccessTokenSilently();
 
         const url = new URL(`${BASE_URL}/api/book`);
         url.searchParams.append("auth0Id", user?.sub as string);
 
-        // 4 .make a GET request to the backend
+        // 3. make a request to the backend
         const response = await fetch(url.toString(), {
             method: "GET",
             headers: {
@@ -23,13 +23,14 @@ export const useGetBooksApi = () => {
             },
         });
 
-        // 5. check if the request was successful
+        // 4. check if the request was successful
         if (!response.ok) {
             const responseMessage = await response.json();
 
-            // explain for the future me: this trick is to prevent keep loading the page when there is no conversation
-            // the message "No conversations found" is sent from the backend when there is no conversation
-            // this is useful when the user has no conversation yet, the frontend will load the page once and stop loading
+            // explain for the future me: this trick is to prevent keep loading the page when there is no book
+            // the message "No book found" is sent from the backend when there is no book found
+            // this is useful when the user has no book yet (i.e., user just signed up),
+            // the frontend will load the page once and stop loading
             if (responseMessage.message === "No book found") {
                 return [];
             }
@@ -40,7 +41,7 @@ export const useGetBooksApi = () => {
         return response.json();
     };
 
-    // 4. use the useQuery hook to get the listConversations of the current user
+    // 5. use the useQuery hook to get books
     const {
         data: currentBooks,
         isLoading,

@@ -5,8 +5,6 @@ import {
 } from "@/components/ui/shadcn/select";
 import { Button } from "@/components/ui/shadcn/button";
 
-// import "./chatframe.css";
-
 export const Loading = () => {
     return (
         <>

@@ -16,7 +16,7 @@ export const useGetListConversationsApi = () => {
         const url = new URL(`${BASE_URL}/api/listconversations`);
         url.searchParams.append("auth0Id", user?.sub as string);
 
-        // 4 .make a GET request to the backend
+        // 4 .make a request to the backend
         const response = await fetch(url.toString(), {
             method: "GET",
             headers: {
@@ -31,7 +31,8 @@ export const useGetListConversationsApi = () => {
 
             // explain for the future me: this trick is to prevent keep loading the page when there is no conversation
             // the message "No conversations found" is sent from the backend when there is no conversation
-            // this is useful when the user has no conversation yet, the frontend will load the page once and stop loading
+            // this is useful when the user has no conversation yet (i.e., user just signed up),
+            // the frontend will load the page once and stop loading
             if (responseMessage.message === "No conversations found") {
                 return [];
             }
@@ -42,7 +43,7 @@ export const useGetListConversationsApi = () => {
         return response.json();
     };
 
-    // 4. use the useQuery hook to get the listConversations of the current user
+    // 4. use the useQuery hook to get listConversations
     const {
         data: currentListConversations,
         isLoading,

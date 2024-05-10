@@ -8,7 +8,7 @@ import { ChatWithLibrarian } from "./pages/ChatWithLibrarian";
 import { NewBook } from "./pages/NewBook";
 import { Redirect } from "./pages/Redirect";
 import { UserProfile } from "./pages/UserProfile";
-import { TestUi } from "./pages/testUi";
+import { TestUi } from "./pages/testUI";
 import { BookDetails } from "./pages/BookDetails";
 
 const App = () => {

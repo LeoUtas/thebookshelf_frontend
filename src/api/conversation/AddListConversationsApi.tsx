@@ -16,8 +16,7 @@ export const useAddListConversationsApi = () => {
         // 1. declare a variable to store the access token
         const accessToken = await getAccessTokenSilently();
 
-        // 2. declare a variable to store the access token
-        // make a POST request to the auth API
+        // 2. make a request to the backend
         const response = await fetch(`${BASE_URL}/api/listconversations`, {
             method: "POST",
             headers: {

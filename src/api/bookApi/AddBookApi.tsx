@@ -3,8 +3,6 @@ import { useMutation } from "react-query";
 import { toast } from "sonner";
 import { BASE_URL } from "../utils/utils";
 
-// def a type for the FormBookData
-
 // def a hook to make use of the AuthAPI
 export const useAddCurrentBookApi = () => {
     // get the access token from Auth0
