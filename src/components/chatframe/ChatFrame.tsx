@@ -37,6 +37,7 @@ import { useDeleteConversationApi } from "@/api/conversation/DeleteConversationA
 import { useLocation } from "react-router-dom";
 import { useGetBooksApi } from "@/api/bookApi/GetListBookApi";
 import { createTitleData } from "../bookshelfframe/utils";
+import { onConfirmAlert } from "../sweetalert/ConfirmAlert";
 
 const querySchema = z.object({
     query: z.string(),
@@ -168,8 +169,16 @@ export const ChatFrame = () => {
 
     // create a function to delete the selected conversation
     const handleDeleteConversation = async (conversationId: string) => {
-        await deleteConversation(conversationId);
-        refetch();
+        onConfirmAlert({
+            titleAlert: "Are you sure you want to delete this conversation?",
+            onConfirmTitle: "Conversation has been deleted",
+            onDenyTitle: "Conversation has not been deleted",
+
+            action: async () => {
+                await deleteConversation(conversationId);
+                refetch();
+            },
+        });
     };
 
     if (isDeleteConversationLoading) {
@@ -244,8 +253,8 @@ export const ChatFrame = () => {
 
                 {/* start a new chat*/}
                 <div className="absolute right-0 w-[71vw] min-h-[80vh] max-h-[200vh] rounded-[1.25rem] bg-transparent mx-auto">
-                    <div className="flex items-center mt-[1.5vh]">
-                        <div className="absolute w-[10.5vw] border border-[#9bafd9] py-[.1rem] rounded-2xl shadow-lg active:shadow-inner focus:outline-none transition-all duration-150 ease-in-out">
+                    <div className="flex flex-col sm:flex-row items-center mt-[1.5vh]">
+                        <div className="w-[8rem] sm:w-[8rem] mr-[1rem] border border-[#9bafd9] py-[.1rem] rounded-2xl shadow-lg active:shadow-inner focus:outline-none transition-all duration-150 ease-in-out mb-4 sm:mb-0">
                             <Button
                                 onClick={handleNewChat}
                                 type="button"
@@ -255,9 +264,9 @@ export const ChatFrame = () => {
                             </Button>
                         </div>
 
-                        <div className="ml-[12vw]">
+                        <div className="w-[35vw]">
                             <Select onValueChange={setSelectedTitle}>
-                                <SelectTrigger className="font-garamond text-[1.25rem] text-gray-800  w-[35.5vw] py-[1.25rem] px-[1rem] border border-[#9bafd9] shadow-lg rounded-[0.8rem] hover:font-bold">
+                                <SelectTrigger className="font-garamond text-[1.25rem] text-gray-800 py-[1.25rem] border border-[#9bafd9] shadow-lg rounded-[0.8rem] hover:font-bold">
                                     {selectedTitle ? (
                                         <SelectValue
                                             placeholder={selectedTitle}

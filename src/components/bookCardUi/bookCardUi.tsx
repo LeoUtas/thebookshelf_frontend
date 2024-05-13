@@ -22,6 +22,7 @@ import {
 import { useDeleteBookApi } from "@/api/bookApi/DeleteBookApi";
 
 import { useGetBooksApi } from "@/api/bookApi/GetListBookApi";
+import { onConfirmAlert } from "../sweetalert/ConfirmAlert";
 
 export function BookCardUi({
     bookId,
@@ -40,8 +41,15 @@ export function BookCardUi({
     };
 
     const handleDeleteBook = async () => {
-        await deleteBook(bookId);
-        refetch();
+        onConfirmAlert({
+            titleAlert: "Are you sure you want to delete this book?",
+            onConfirmTitle: "Book has been deleted",
+            onDenyTitle: "Book has not been deleted",
+            action: async () => {
+                await deleteBook(bookId);
+                refetch();
+            },
+        });
     };
 
     const handleBookDetails = async () => {
@@ -81,15 +89,14 @@ export function BookCardUi({
             <CardFooter>
                 <DropdownMenu>
                     <DropdownMenuTrigger className="outline-none">
-                        <div className="gap-1 flex flex-row ml-[3rem]">
+                        <div className="gap-1 flex flex-row ml-[1.5rem]">
                             <RiMagicFill color="white" size={20} />
                             <HiOutlineDotsHorizontal color="white" size={20} />
                             <HiOutlineSelector color="white" size={20} />
                         </div>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="absolute left-full pl-[2rem] hover:px-[2.1rem]">
+                    <DropdownMenuContent className="absolute ml-[2rem] font-comic">
                         <DropdownMenuItem
-                            className="flex text-center"
                             onClick={() => {
                                 handleBookDetails();
                             }}
@@ -97,7 +104,6 @@ export function BookCardUi({
                             Details
                         </DropdownMenuItem>
                         <DropdownMenuItem
-                            className="flex text-center"
                             onClick={() => {
                                 handleDeleteBook();
                             }}

@@ -25,6 +25,7 @@
     "framer-motion": "^11.1.7",
     "lucide-react": "^0.372.0",
     "next-themes": "^0.3.0",
+    "postcss-apply": "^0.12.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
@@ -34,6 +35,8 @@
     "react-router-dom": "^6.22.3",
     "simplex-noise": "^4.0.1",
     "sonner": "^1.4.41",
+    "sweetalert2": "^11.10.8",
+    "sweetalert2-react-content": "^5.0.7",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.22.5"

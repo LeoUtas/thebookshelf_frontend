@@ -7,7 +7,6 @@ import { Toaster } from "sonner";
 import App from "./App.tsx";
 import AuthProvider from "./auth/AuthProvider.tsx";
 import "./styles/index.css";
-import { LoadedCategoryProvider } from "./contexts/LoadedCategoryContext.tsx";
 
 // add queryClientProvider
 const queryClient = new QueryClient({
@@ -23,14 +22,12 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Router>
             <QueryClientProvider client={queryClient}>
                 <AuthProvider>
-                    <LoadedCategoryProvider>
-                        <App />
-                        <Toaster
-                            visibleToasts={1}
-                            position="top-right"
-                            richColors
-                        />
-                    </LoadedCategoryProvider>
+                    <App />
+                    <Toaster
+                        visibleToasts={1}
+                        position="top-right"
+                        richColors
+                    />
                 </AuthProvider>
             </QueryClientProvider>
         </Router>

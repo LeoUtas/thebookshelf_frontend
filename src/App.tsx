@@ -77,7 +77,7 @@ const App = () => {
                     />
 
                     <Route
-                        path="/testui"
+                        path="/testUI"
                         element={
                             <Layout>
                                 <TestUi />

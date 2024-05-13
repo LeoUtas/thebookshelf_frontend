@@ -1,6 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useMutation } from "react-query";
-import { toast } from "sonner";
 import { BASE_URL } from "../utils/utils";
 import { useGetUserApi } from "../authApi/GetUserApi";
 
@@ -34,8 +33,6 @@ export const useDeleteBookApi = () => {
         if (!response.ok) {
             throw new Error("Failed to delete book");
         }
-
-        toast.success("Book deleted successfully");
 
         return response.json();
     };
