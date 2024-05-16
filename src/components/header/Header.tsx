@@ -4,7 +4,7 @@ type TitleProps = { Title: string };
 export const Header = ({ Title }: TitleProps) => {
     return (
         <>
-            <div className="font-garamond text-h2-title-fontsize text-white font-semibold text-center mt-[4vh]">
+            <div className="font-garamond text-h2-title-fontsize text-white font-semibold text-center mt-[2vh]">
                 {Title}
             </div>
         </>

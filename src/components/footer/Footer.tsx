@@ -1,6 +1,6 @@
 export const Footer = () => {
     return (
-        <div className="text-white text-2xl text-center pb-4 font-garamond">
+        <div className="text-white text-xl text-center pb-2 font-garamond">
             {/* link the HoangNg to an external link */}
             Built by
             <span className="text-[#033e58] p-2">
