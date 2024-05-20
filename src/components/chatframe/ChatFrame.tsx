@@ -379,7 +379,7 @@ export const ChatFrame = () => {
                                     setValue("query", e.target.value)
                                 }
                                 placeholder="Ask anything about your book"
-                                className="font-garamond text-[1.25rem] absolute bottom-0 -translate-y-1/2 pl-4 left-[2%] right-[1%] w-[95%] py-[2vh] bg-white rounded-[1.5rem] border border-[#ccc] shadow-lg"
+                                className="font-garamond text-[1.25rem] absolute bottom-0 -translate-y-1/2 pl-4 left-[2%] right-[1%] w-[95%] py-[1.5rem] bg-white rounded-[1.5rem] border border-[#ccc] shadow-lg"
                             />
                         </div>
                     </form>

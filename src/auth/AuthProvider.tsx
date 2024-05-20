@@ -12,13 +12,13 @@ function AuthProvider({ children }: Auth0ProviderProps) {
 
     // get the Auth0 env variables
     // const AUTH0_DOMAIN = import.meta.env.VITE_AUTH0_DOMAIN_DEV;
-    const AUTH0_DOMAIN = import.meta.env.VITE_AUTH0_DOMAIN_PRO;
     // const AUTH0_CLIENT_ID = import.meta.env.VITE_AUTH0_CLIENT_ID_DEV;
-    const AUTH0_CLIENT_ID = import.meta.env.VITE_AUTH0_CLIENT_ID_PRO;
     // const AUTH0_REDIRECT_URL = import.meta.env.VITE_AUTH0_REDIRECT_URL_DEV;
-    const AUTH0_REDIRECT_URL = import.meta.env.VITE_AUTH0_REDIRECT_URL_PRO;
-
     // const AUTH0_AUDIENCE = import.meta.env.VITE_AUTH0_AUDIENCE_DEV;
+
+    const AUTH0_DOMAIN = import.meta.env.VITE_AUTH0_DOMAIN_PRO;
+    const AUTH0_CLIENT_ID = import.meta.env.VITE_AUTH0_CLIENT_ID_PRO;
+    const AUTH0_REDIRECT_URL = import.meta.env.VITE_AUTH0_REDIRECT_URL_PRO;
     const AUTH0_AUDIENCE = import.meta.env.VITE_AUTH0_AUDIENCE_PRO;
 
     // check if the env variables are available
