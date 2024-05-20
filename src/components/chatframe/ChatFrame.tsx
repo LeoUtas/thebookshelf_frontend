@@ -252,8 +252,8 @@ export const ChatFrame = () => {
                     </div>
                 </div>
 
-                <div className="w-3/4 bg-white h-[80vh] rounded-xl">
-                    {/* right column for displaying selected conversation */}
+                <div className="w-3/4 bg-white h-[80vh] rounded-xl relative">
+                    {/* right column for displaying list of conversations */}
                     <div className="flex flex-col sm:flex-row items-center mt-[1.5vh]">
                         <div className="w-[8rem] sm:w-[8rem] mr-[1rem] ml-[2rem] border border-[#9bafd9] rounded-2xl shadow-lg active:shadow-inner focus:outline-none transition-all duration-150 ease-in-out">
                             <Button
@@ -290,9 +290,9 @@ export const ChatFrame = () => {
                         </div>
                     </div>
 
-                    {/* display the conversations when clicking a conversation title on the left */}
+                    {/* display the selected conversation when clicking a conversation title on the left */}
                     {!displayNewChat && selectedConversation && (
-                        <div className="no-scrollbar overflow-y-auto h-[68vh] font-garamond text-[1.25rem] px-[5vw] leading-[2.25rem]">
+                        <div className="no-scrollbar overflow-y-auto h-[80%] font-garamond text-[1.25rem] px-[5vw] leading-[2.25rem]">
                             {selectedConversation.listConversations.map(
                                 (data, index) => (
                                     <div key={index}>
@@ -324,7 +324,7 @@ export const ChatFrame = () => {
                                     <GiSave color="#9eb9dd" size={28} />
                                 </div>
                             ) : (
-                                <div className="no-scrollbar overflow-y-auto w-[69vw] h-[68vh] px-[5vw] pt-[2rem] font-garamond text-[1.25rem] leading-[2.25rem]">
+                                <div className="no-scrollbar overflow-y-auto w-[69vw] h-[80%] px-[5vw] pt-[2rem] font-garamond text-[1.25rem] leading-[2.25rem]">
                                     <div className="overflow-y-auto">
                                         {conversation
                                             .slice(2)
@@ -379,7 +379,7 @@ export const ChatFrame = () => {
                                     setValue("query", e.target.value)
                                 }
                                 placeholder="Ask anything about your book"
-                                className="font-garamond text-[1.25rem] absolute top-[91%] ml-[25vw] -translate-y-1/2 pl-4 left-[2%] right-[1%] w-[69%] py-[1.75rem] bg-white rounded-[1.5rem] border border-[#ccc] shadow-lg"
+                                className="font-garamond text-[1.25rem] absolute bottom-0 -translate-y-1/2 pl-4 left-[2%] right-[1%] w-[95%] py-[2vh] bg-white rounded-[1.5rem] border border-[#ccc] shadow-lg"
                             />
                         </div>
                     </form>
